@@ -1,0 +1,35 @@
+---
+import { Query } from 'appwrite';
+
+import { databases } from '@/lib/appwrite';
+
+import Layout from '@/layouts/Layout.astro';
+import Container from '@/components/Container.astro';
+
+const { postSlug } = Astro.params;
+
+const { documents } = await databases.listDocuments(
+  import.meta.env.PUBLIC_APPWRITE_DATABASE_ID,
+  import.meta.env.PUBLIC_APPWRITE_COLLECTION_ID,
+  [Query.equal('slug', String(postSlug))]
+);
+
+if ( !documents.length ) {
+	return Astro.redirect('/404');
+}
+
+const post = documents[0];
+const publishedDate = new Date(post.$createdAt);
+console.log('documents', documents)
+---
+<Layout title={`${post.title} - My Blog`}>
+	<Container>
+		<article class="prose mx-auto">
+			<h1 class="text-4xl font-extrabold mb-6">{ post.title }</h1>
+			<p class="text-slate-500 mb-14">
+				<time datetime={publishedDate.toISOString()}>Published { publishedDate.toLocaleDateString() }</time>
+			</p>
+			<Fragment set:html={post.content} />
+		</article>
+	</Container>
+</Layout>

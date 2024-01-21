@@ -1,0 +1,35 @@
+---
+import { databases } from '@/lib/appwrite';
+
+import Layout from '@/layouts/Layout.astro';
+import Container from '@/components/Container.astro';
+
+const { documents: posts } = await databases.listDocuments(
+  import.meta.env.PUBLIC_APPWRITE_DATABASE_ID,
+  import.meta.env.PUBLIC_APPWRITE_COLLECTION_ID
+);
+---
+<Layout title="My Blog">
+	<Container>
+		<h1 class="sr-only">Blog Posts</h1>
+		<ul>
+			{posts.map(post => {
+				return (
+					<li class="mb-12 last:mb-0">
+						<h2 class="text-3xl font-semibold mb-4">
+							<a class="hover:text-blue-500 hover:underline" href={`/posts/${post.slug}`}>
+								{ post.title }
+							</a>
+						</h2>
+						<p class="text-sm text-slate-500 mb-4">
+							{ new Date(post.$createdAt).toLocaleDateString() }
+						</p>
+						<p>
+							{ post.excerpt }
+						</p>
+					</li>
+				)
+			})}
+		</ul>
+	</Container>
+</Layout>

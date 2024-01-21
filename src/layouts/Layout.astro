@@ -1,0 +1,36 @@
+---
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+
+interface Props {
+	title: string;
+}
+
+const { title = 'My Blog' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="This blog is full of wisdom." />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class="grid grid-rows-[auto_1fr_auto] h-screen">
+			<Nav />
+			<main>
+				<slot />
+			</main>
+			<Footer />
+		</div>
+	</body>
+</html>
+<style is:global>
+	html {
+		font-family: system-ui, sans-serif;
+		background: #fff;
+	}
+</style>
