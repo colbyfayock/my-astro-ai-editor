@@ -1,3 +1,5 @@
+import { Editor } from 'novel';
+
 const FormNewPost = () => {
   return (
     <form>
@@ -23,10 +25,12 @@ const FormNewPost = () => {
 
       <div className="mb-6">
         <label className="block text-sm font-semibold mb-3">Content</label>
-        <textarea
-          id="content"
-          className="block w-full text-slate-900 border-slate-400 rounded focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          name="content"
+        <Editor
+          disableLocalStorage={true}
+          defaultValue={{
+            "type": "doc",
+            "content": []
+          }}
         />
       </div>
 
