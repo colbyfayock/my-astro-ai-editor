@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import { Editor } from 'novel';
+import { ID } from 'appwrite';
 import type { SyntheticEvent } from 'react';
 import type { Editor as TipTapEditor } from '@tiptap/core';
+
+import { databases } from '@/lib/appwrite';
 
 const FormNewPost = () => {
   const [content, setContent] = useState<string>();
 
   async function handleOnSubmit(event: SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // Disabled for demo
+
+    return;
 
     const target = event.target as typeof event.target & {
       title: { value: string };
@@ -22,10 +29,25 @@ const FormNewPost = () => {
       content
     }
 
-    // Do something with data
+    const results = await databases.createDocument(
+      import.meta.env.PUBLIC_APPWRITE_DATABASE_ID,
+      import.meta.env.PUBLIC_APPWRITE_COLLECTION_ID,
+      ID.unique(),
+      {
+        title: target.title.value,
+        slug: target.slug.value,
+        excerpt: target.excerpt.value,
+        content
+      }
+    );
+
+    window.location.href = `/posts/${results.slug}`;
   }
   return (
     <form onSubmit={handleOnSubmit}>
+      <p className="rounded bg-red-100 dark:bg-red-900 text-sm text-center py-2 mb-6">
+        Creating a new post is disabled for this demo.
+      </p>
       <div className="mb-6">
         <label className="block text-sm font-semibold mb-3" htmlFor="title">Title</label>
         <input
