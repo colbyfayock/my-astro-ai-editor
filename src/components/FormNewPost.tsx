@@ -1,8 +1,31 @@
+import { useState } from 'react';
 import { Editor } from 'novel';
+import type { SyntheticEvent } from 'react';
+import type { Editor as TipTapEditor } from '@tiptap/core';
 
 const FormNewPost = () => {
+  const [content, setContent] = useState<string>();
+
+  async function handleOnSubmit(event: SyntheticEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const target = event.target as typeof event.target & {
+      title: { value: string };
+      slug: { value: string };
+      excerpt: { value: string };
+    }
+
+    const data = {
+      title: target.title.value,
+      slug: target.slug.value,
+      excerpt: target.excerpt.value,
+      content
+    }
+
+    // Do something with data
+  }
   return (
-    <form>
+    <form onSubmit={handleOnSubmit}>
       <div className="mb-6">
         <label className="block text-sm font-semibold mb-3" htmlFor="title">Title</label>
         <input
@@ -30,6 +53,9 @@ const FormNewPost = () => {
           defaultValue={{
             "type": "doc",
             "content": []
+          }}
+          onDebouncedUpdate={(editor?: TipTapEditor) => {
+            setContent(editor?.getHTML())
           }}
         />
       </div>
