@@ -1,12 +1,12 @@
 # Astro Blog with Appwrite
 
-Demo for tutorial 
+Demo for tutorial [How to Add an AI-Powered WYSIWYG Editor in React & Astro with Novel](https://www.youtube.com/watch?v=ZgstesimYN0)
 
-📝 Article: 
+📝 Article: https://spacejelly.dev/posts/how-to-add-an-ai-powered-wysiwyg-editor-in-react-astro-with-novel/
 
-📺 YouTube: 
+📺 YouTube: https://www.youtube.com/watch?v=ZgstesimYN0
 
-🚀 Demo: 
+🚀 Demo: https://my-astro-ai-editor.vercel.app/posts/new
 
 ## More tutorials and walkthroughs
 
