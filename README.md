@@ -1,4 +1,4 @@
-# Astro Blog with Appwrite
+# AI-Powered WYSIWYG Editor in React & Astro
 
 Demo for tutorial [How to Add an AI-Powered WYSIWYG Editor in React & Astro with Novel](https://www.youtube.com/watch?v=ZgstesimYN0)
 
