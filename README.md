@@ -6,7 +6,6 @@ Demo for tutorial [How to Add an AI-Powered WYSIWYG Editor in React & Astro with
 
 📺 YouTube: https://www.youtube.com/watch?v=ZgstesimYN0
 
-🚀 Demo: https://my-astro-ai-editor.vercel.app/posts/new
 
 ## More tutorials and walkthroughs
 
